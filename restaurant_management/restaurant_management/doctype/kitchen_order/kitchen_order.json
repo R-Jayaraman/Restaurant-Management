@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "allow_auto_repeat": 0,
+ "allow_copy": 1,
+ "allow_events_in_timeline": 0,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:KO-{#######}",
+ "creation": "2026-08-13 03:00:00.000000",
+ "custom": 0,
+ "description": "Kitchen order ticket (KOT).",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "order",
+  "table",
+  "station",
+  "items",
+  "status",
+  "priority",
+  "special_instructions"
+ ],
+ "fields": [
+  {
+   "fieldname": "order",
+   "fieldtype": "Link",
+   "label": "Order",
+   "options": "Order",
+   "reqd": 1
+  },
+  {
+   "fieldname": "table",
+   "fieldtype": "Link",
+   "label": "Table",
+   "options": "Table",
+   "fetch_from": "order.table",
+   "read_only": 1
+  },
+  {
+   "fieldname": "station",
+   "fieldtype": "Select",
+   "label": "Station",
+   "options": "Grill\nSalad\nDessert\nBar\nMain\nGeneral",
+   "default": "General"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Kitchen Order Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nPreparing\nReady\nServed",
+   "default": "Pending",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priority",
+   "options": "Low\nNormal\nHigh\nUrgent",
+   "default": "Normal"
+  },
+  {
+   "fieldname": "special_instructions",
+   "fieldtype": "Small Text",
+   "label": "Special Instructions"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-08-13 02:57:38.714559",
+ "modified_by": "Administrator",
+ "module": "Restaurant Management",
+ "name": "Kitchen Order",
+ "naming_rule": "By \"Naming Series\" format",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Restaurant Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "import": 0,
+   "share": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "Kitchen Staff",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "import": 0,
+   "share": 0,
+   "print": 1,
+   "email": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1,
+ "doctype": "DocType"
+}

@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "allow_auto_repeat": 0,
+ "allow_copy": 1,
+ "allow_events_in_timeline": 0,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:CUS-{#######}",
+ "creation": "2026-08-13 03:00:00.000000",
+ "custom": 0,
+ "description": "Restaurant customers/guests.",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_name",
+  "phone",
+  "email",
+  "address",
+  "customer_type",
+  "loyalty_points",
+  "notes",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Phone",
+   "label": "Phone",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "customer_type",
+   "fieldtype": "Select",
+   "label": "Customer Type",
+   "options": "Individual\nCorporate\nVIP\nRegular",
+   "default": "Individual"
+  },
+  {
+   "fieldname": "loyalty_points",
+   "fieldtype": "Int",
+   "label": "Loyalty Points",
+   "default": "0",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": "1"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Reservation",
+   "link_fieldname": "customer"
+  },
+  {
+   "link_doctype": "Order",
+   "link_fieldname": "customer"
+  }
+ ],
+ "modified": "2026-08-13 02:57:38.714559",
+ "modified_by": "Administrator",
+ "module": "Restaurant Management",
+ "name": "Customer",
+ "naming_rule": "By \"Naming Series\" format",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Restaurant Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "import": 0,
+   "share": 1,
+   "print": 1,
+   "email": 1
+  },
+  {
+   "role": "Restaurant Staff",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "import": 0,
+   "share": 0,
+   "print": 1,
+   "email": 1
+  }
+ ],
+ "sort_field": "customer_name",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1,
+ "doctype": "DocType",
+ "title_field": "customer_name"
+}

@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_auto_repeat": 0,
+ "allow_copy": 1,
+ "allow_events_in_timeline": 0,
+ "allow_import": 0,
+ "allow_rename": 0,
+ "creation": "2026-08-13 03:00:00.000000",
+ "custom": 0,
+ "description": "Global restaurant configuration (single record).",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "restaurant_name",
+  "address",
+  "phone",
+  "email",
+  "gstin",
+  "fssai_license",
+  "currency",
+  "opening_time",
+  "closing_time",
+  "default_tax_rate",
+  "service_charge_percentage",
+  "max_party_size",
+  "default_reservation_duration"
+ ],
+ "fields": [
+  {
+   "fieldname": "restaurant_name",
+   "fieldtype": "Data",
+   "label": "Restaurant Name",
+   "reqd": 1,
+   "default": "My Restaurant"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Phone",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN"
+  },
+  {
+   "fieldname": "fssai_license",
+   "fieldtype": "Data",
+   "label": "FSSAI License"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "default": "INR"
+  },
+  {
+   "fieldname": "opening_time",
+   "fieldtype": "Time",
+   "label": "Opening Time",
+   "default": "11:00:00"
+  },
+  {
+   "fieldname": "closing_time",
+   "fieldtype": "Time",
+   "label": "Closing Time",
+   "default": "22:00:00"
+  },
+  {
+   "fieldname": "default_tax_rate",
+   "fieldtype": "Percent",
+   "label": "Default Tax Rate",
+   "default": "5"
+  },
+  {
+   "fieldname": "service_charge_percentage",
+   "fieldtype": "Percent",
+   "label": "Service Charge Percentage",
+   "default": "0"
+  },
+  {
+   "fieldname": "max_party_size",
+   "fieldtype": "Int",
+   "label": "Max Party Size",
+   "default": "12"
+  },
+  {
+   "fieldname": "default_reservation_duration",
+   "fieldtype": "Int",
+   "label": "Default Reservation Duration (min)",
+   "default": "90"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "issingle": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-08-13 02:57:38.714559",
+ "modified_by": "Administrator",
+ "module": "Restaurant Management",
+ "name": "Restaurant Settings",
+ "naming_rule": null,
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Restaurant Manager",
+   "read": 1,
+   "write": 1,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "import": 0,
+   "share": 1,
+   "print": 1,
+   "email": 1
+  }
+ ],
+ "states": [],
+ "track_changes": 1,
+ "doctype": "DocType"
+}
