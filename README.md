@@ -4,14 +4,14 @@ A minimal, standalone Frappe application for running the core day-to-day operati
 
 ## Overview
 
-Restaurant Management gives a small restaurant a single, simple system to record what it needs to run day to day, without pulling in the size and complexity of a full ERP. It is intentionally minimal: 17 DocTypes total, no ERPNext or HRMS dependency, and no automation — every document is created and updated directly by restaurant staff.
+Restaurant Management gives a small restaurant a single, simple system to record what it needs to run day to day, without pulling in the size and complexity of a full ERP. It is intentionally minimal: 17 DocTypes total, no ERPNext or HRMS dependency. Line-item totals, basic data validation, and payment status are calculated automatically; everything else — taking orders, logging stock movements, recording payments — is entered directly by restaurant staff.
 
 The core front-of-house workflow:
 
 ```
 Restaurant Setup
     → Tables
-    → Customers / Reservations
+    → Restaurant Customers / Reservations
     → Menu
     → Orders
     → Kitchen Orders
@@ -26,23 +26,26 @@ Inventory Items
     → Stock Transactions
 ```
 
-**Staff** is a simple standalone employee directory (no shift, attendance, or performance tracking). **Expense** is a simple standalone operating-expense log, optionally tagged to a Supplier. Neither connects into the order/inventory flow.
+**Staff** is a simple standalone employee directory (no shift, attendance, or performance tracking). **Restaurant Expense** is a simple standalone operating-expense log, optionally tagged to a Supplier. Neither connects into the order/inventory flow.
+
+**Naming note:** `Restaurant Customer`, `Restaurant Payment`, and `Restaurant Expense` are named with the `Restaurant` prefix (rather than plain `Customer`/`Payment`/`Expense`) because this site also runs other standalone apps (e.g. Online Seat Booking) that define their own DocTypes with those same plain names. Frappe requires DocType names to be unique per site, so these three were prefixed to avoid colliding with — and being silently overridden by — another installed app's DocTypes of the same name.
 
 ## Features
 
 - Table management with status and seating capacity
-- Customer directory with a simple loyalty points balance
+- Restaurant Customer directory with a simple loyalty points balance
 - Reservation and waitlist tracking (single DocType, distinguished by type)
 - Menu item catalog with pricing and tax rate, optionally linked to an Inventory Item
-- Order taking (dine-in or takeaway) with line items and running totals
+- Order taking (dine-in or takeaway) with line items and **automatically calculated totals** (line amount, subtotal, tax, total)
 - Kitchen order tickets (KOT) derived from order line items
-- Payment recording against an order
+- Restaurant Payment recording against an order, with the order's payment status **kept in sync automatically**
 - Inventory item master with unit of measure and reorder level
 - Stock transaction log (purchase receipt, manual adjustment, or waste)
 - Supplier directory
-- Purchase transactions with line items and a status lifecycle
+- Purchase transactions with line items and **automatically calculated totals**
 - Staff directory
-- Expense logging
+- Restaurant Expense logging
+- Basic data validation across the app (positive quantities/amounts, sane time ranges, discount can't exceed subtotal, etc.)
 
 ## DocType Architecture
 
@@ -52,7 +55,7 @@ The app deliberately uses a minimal 17-DocType architecture: 14 main DocTypes an
 |---|---|---|
 | Restaurant Settings | Main (Single) | Global restaurant configuration |
 | Table | Main | Restaurant tables/seating |
-| Customer | Main | Customer directory |
+| Restaurant Customer | Main | Customer directory |
 | Menu Item | Main | Sellable menu items |
 | Reservation | Main | Table reservations and waitlist entries |
 | Order | Main | Customer order / bill |
@@ -62,8 +65,8 @@ The app deliberately uses a minimal 17-DocType architecture: 14 main DocTypes an
 | Supplier | Main | Vendor directory |
 | Purchase | Main | Purchase transaction with a supplier |
 | Staff | Main | Staff directory |
-| Payment | Main | Payment received against an order |
-| Expense | Main | Operating expense |
+| Restaurant Payment | Main | Payment received against an order |
+| Restaurant Expense | Main | Operating expense |
 | Order Item | Child Table | Line items within an Order |
 | Kitchen Order Item | Child Table | Line items within a Kitchen Order |
 | Purchase Item | Child Table | Line items within a Purchase |
@@ -84,6 +87,8 @@ Important fields:
 
 It doesn't link out to any other restaurant_management DocType — it's read as reference configuration.
 
+**Validation:** `opening_time` must be before `closing_time`.
+
 ### Table
 
 Represents a physical table in the restaurant.
@@ -98,7 +103,9 @@ Important fields:
 
 Referenced by Reservation and Order.
 
-### Customer
+**Validation:** `capacity` must be greater than zero.
+
+### Restaurant Customer
 
 Stores restaurant customer information.
 
@@ -124,18 +131,22 @@ Important fields:
 - is_vegetarian, is_available
 - image
 
-Referenced by Order Item.
+Referenced by Order Item. Its `tax_rate` is used automatically when an Order's tax is calculated (see Order below).
+
+**Validation:** `price` must be greater than zero; `tax_rate` must be between 0 and 100.
 
 ### Reservation
 
 A table booking or waitlist entry — the same DocType handles both, distinguished by `reservation_type`.
 
 Important fields:
-- customer (Link), table (Link)
+- customer (Link to Restaurant Customer), table (Link)
 - reservation_type: Reservation or Waitlist
 - reservation_date, reservation_time, party_size
 - status
 - special_requests, notes
+
+**Validation:** `party_size` must be greater than zero.
 
 ### Order
 
@@ -143,13 +154,23 @@ The customer order — this also serves as the restaurant bill; there is no sepa
 
 Important fields:
 - order_type: Dine In or Takeaway
-- customer (Link), table (Link)
+- customer (Link to Restaurant Customer), table (Link)
 - order_date, order_time
 - items — Child Table of Order Item
 - subtotal, tax_amount, discount_amount, total_amount
 - payment_status, status
 
-Connects to Kitchen Order (which references the Order) and Payment (which references the Order).
+Connects to Kitchen Order (which references the Order) and Restaurant Payment (which references the Order).
+
+**Automatic calculation (on every save):**
+- Each Order Item's `amount` = qty × rate
+- `subtotal` = sum of all line amounts
+- `tax_amount` = sum of each line's amount × that line's Menu Item `tax_rate`
+- `total_amount` = subtotal + tax_amount − discount_amount
+
+**Validation:** every line's `qty` must be greater than zero; `discount_amount` cannot be negative or exceed the subtotal.
+
+**payment_status is kept in sync automatically** — see Restaurant Payment below.
 
 ### Kitchen Order
 
@@ -177,6 +198,8 @@ Important fields:
 
 Referenced by Purchase Item, Stock Transaction, and optionally by Menu Item.
 
+**Validation:** `standard_rate` and `reorder_level` cannot be negative.
+
 ### Stock Transaction
 
 A single stock movement record.
@@ -191,6 +214,8 @@ Important fields:
 
 There is no separate Warehouse DocType and no automatic stock-balance calculation — each Stock Transaction is an independent record entered directly.
 
+**Validation:** `qty` cannot be zero; a Purchase-type transaction's `qty` must be positive, a Waste-type transaction's `qty` must be negative.
+
 ### Supplier
 
 The vendor/supplier directory.
@@ -201,7 +226,7 @@ Important fields:
 - gstin
 - is_active
 
-Referenced by Purchase and optionally by Expense.
+Referenced by Purchase and optionally by Restaurant Expense.
 
 ### Purchase
 
@@ -215,6 +240,10 @@ Important fields:
 - status: Draft, Ordered, Received, or Paid
 - notes
 
+**Automatic calculation (on every save):** each Purchase Item's `amount` = qty × rate; `total_amount` = sum of all line amounts.
+
+**Validation:** every line's `qty` must be greater than zero and `rate` cannot be negative.
+
 ### Staff
 
 A simple, standalone staff directory. There is no Attendance, Shift, Staff Skill, or Staff Performance DocType.
@@ -227,7 +256,9 @@ Important fields:
 - salary
 - is_active, notes
 
-### Payment
+**Validation:** `salary` cannot be negative.
+
+### Restaurant Payment
 
 A payment recorded against an order.
 
@@ -238,7 +269,11 @@ Important fields:
 - amount
 - reference_number, notes
 
-### Expense
+**Validation:** `amount` must be greater than zero.
+
+**Automatic reconciliation:** whenever a Restaurant Payment is created, edited, or deleted, the linked Order's `payment_status` is recalculated from the sum of all Restaurant Payments against it — **Unpaid** (nothing paid), **Partial** (something paid but less than the order total), or **Paid** (paid in full or more).
+
+### Restaurant Expense
 
 A standalone operating-expense record.
 
@@ -250,13 +285,15 @@ Important fields:
 - supplier — optional Link to Supplier
 - notes
 
+**Validation:** `amount` must be greater than zero.
+
 ## Child Tables
 
 ### Order Item
 
 Used inside Order.items. Stores one menu item line of the order.
 
-Fields: menu_item (Link to Menu Item), item_name (fetched), qty, rate (fetched from the menu item's price), amount.
+Fields: menu_item (Link to Menu Item), item_name (fetched), qty, rate (fetched from the menu item's price), amount (calculated automatically — see Order above).
 
 ### Kitchen Order Item
 
@@ -268,30 +305,30 @@ Fields: order_item (Link to Order Item), item_name (fetched from order_item), qt
 
 Used inside Purchase.items. Stores one inventory item line of the purchase.
 
-Fields: item (Link to Inventory Item), item_name (fetched), qty, rate, amount.
+Fields: item (Link to Inventory Item), item_name (fetched), qty, rate, amount (calculated automatically — see Purchase above).
 
 ## How The App Works
 
 1. **Restaurant Setup** — configure the single Restaurant Settings record (name, hours, tax rate, etc.).
 2. **Table Management** — create Table records with capacity and status.
-3. **Customer Management** — create Customer records as guests are registered.
-4. **Reservations** — book a table for a Customer via Reservation (or log a walk-in as a Waitlist-type Reservation).
+3. **Customer Management** — create Restaurant Customer records as guests are registered.
+4. **Reservations** — book a table for a Restaurant Customer via Reservation (or log a walk-in as a Waitlist-type Reservation).
 5. **Menu Management** — build out the Menu Item catalog with prices and categories.
-6. **Order Management** — create an Order for a Customer/Table, add Order Item lines from the Menu Item catalog.
+6. **Order Management** — create an Order for a Restaurant Customer/Table, add Order Item lines from the Menu Item catalog; totals calculate automatically on save.
 7. **Kitchen Orders** — create a Kitchen Order against the Order, with Kitchen Order Item lines referencing the Order Item lines.
-8. **Payments** — record a Payment against the Order once the bill is settled.
+8. **Payments** — record a Restaurant Payment against the Order; the Order's payment status updates automatically.
 9. **Inventory** — maintain the Inventory Item master, log movements as Stock Transaction records (purchase receipt, manual adjustment, or waste).
-10. **Purchasing** — record a Purchase against a Supplier with Purchase Item lines, tracked through Draft → Ordered → Received → Paid.
+10. **Purchasing** — record a Purchase against a Supplier with Purchase Item lines (totals calculate automatically), tracked through Draft → Ordered → Received → Paid.
 11. **Staff** — maintain the Staff directory.
-12. **Expenses** — log operating expenses, optionally tagged to a Supplier.
+12. **Expenses** — log Restaurant Expense records, optionally tagged to a Supplier.
 
 ## Relationships
 
 ```mermaid
 graph LR
-    Customer --> Reservation
+    RestaurantCustomer["Restaurant Customer"] --> Reservation
     Table --> Reservation
-    Customer --> Order
+    RestaurantCustomer --> Order
     Table --> Order
     Order --> OrderItem["Order Item"]
     OrderItem --> MenuItem["Menu Item"]
@@ -299,12 +336,12 @@ graph LR
     Order --> KitchenOrder["Kitchen Order"]
     KitchenOrder --> KitchenOrderItem["Kitchen Order Item"]
     KitchenOrderItem --> OrderItem
-    Order --> Payment
+    Order --> RestaurantPayment["Restaurant Payment"]
     Supplier --> Purchase
     Purchase --> PurchaseItem["Purchase Item"]
     PurchaseItem --> InventoryItem
     InventoryItem --> StockTransaction["Stock Transaction"]
-    Expense -. optional .-> Supplier
+    RestaurantExpense["Restaurant Expense"] -. optional .-> Supplier
 ```
 
 ## Installation
@@ -340,12 +377,13 @@ bench --site <site-name> clear-cache
 - No unnecessary master DocTypes — UOM, Item Group, Warehouse, and Tax are plain fields, not DocTypes
 - Simple, direct relationships — no multi-hop procurement chains or duplicate billing documents
 - Frappe core functionality reused where appropriate (e.g. the core Currency DocType on Restaurant Settings)
+- DocTypes prefixed with `Restaurant` only where a plain name would collide with another app installed on the same site (Restaurant Customer, Restaurant Payment, Restaurant Expense) — every other DocType keeps its plain, unprefixed name
 
 ## Current Scope
 
-This app covers direct, manual record-keeping for: restaurant setup, tables, customers, reservations/waitlist, menu, orders, kitchen tickets, payments, inventory items, stock transactions, suppliers, purchases, staff, and expenses.
+This app covers direct record-keeping for: restaurant setup, tables, customers, reservations/waitlist, menu, orders, kitchen tickets, payments, inventory items, stock transactions, suppliers, purchases, staff, and expenses — with automatic line-item/total calculation, basic data validation, and Order/Payment status reconciliation, as detailed in DocType Details above.
 
-All DocType controllers are empty (`pass`) — there is no business logic implemented. Specifically, the following are **not** implemented:
+Specifically, the following are **not** implemented:
 
 - Automatic inventory deduction when an order is placed or served
 - Recipe-based stock consumption
@@ -353,9 +391,10 @@ All DocType controllers are empty (`pass`) — there is no business logic implem
 - Delivery management (Order only supports Dine In and Takeaway)
 - Attendance management
 - Shift management
-- Loyalty program management (only a flat `loyalty_points` number exists on Customer)
-- Automated tax calculations
+- Loyalty program management (only a flat `loyalty_points` number exists on Restaurant Customer)
+- Multi-component/template-based tax calculation (Order tax is a straightforward per-line calculation from each Menu Item's flat `tax_rate` — there is no GST-style CGST/SGST breakdown or tax template)
 - Automated stock-balance calculations (Stock Transaction records are independent entries; there is no running balance computed anywhere)
+- Notifications, workflows, reports, dashboards, scheduled/background jobs, APIs, or integrations
 
 ## Future Enhancements
 
