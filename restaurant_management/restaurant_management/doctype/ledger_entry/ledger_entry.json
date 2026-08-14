@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_auto_repeat": 0,
+ "allow_copy": 1,
+ "allow_events_in_timeline": 0,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:LDG-{#######}",
+ "creation": "2026-08-14 18:13:12.297252",
+ "custom": 0,
+ "description": "One row per debit or credit movement. System-generated from Order/Restaurant Payment events.",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "posting_date",
+  "account",
+  "debit",
+  "credit",
+  "against_voucher_type",
+  "against_voucher",
+  "customer",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "Account",
+   "options": "Account",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "debit",
+   "fieldtype": "Currency",
+   "label": "Debit",
+   "options": "currency",
+   "default": "0",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "credit",
+   "fieldtype": "Currency",
+   "label": "Credit",
+   "options": "currency",
+   "default": "0",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "against_voucher_type",
+   "fieldtype": "Select",
+   "label": "Against Voucher Type",
+   "options": "Order\nRestaurant Payment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "against_voucher",
+   "fieldtype": "Dynamic Link",
+   "label": "Against Voucher",
+   "options": "against_voucher_type",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Restaurant Customer"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-08-14 18:13:12.297252",
+ "modified_by": "Administrator",
+ "module": "Restaurant Management",
+ "name": "Ledger Entry",
+ "naming_rule": "By \"Naming Series\" format",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Restaurant Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "report": 1,
+   "export": 1,
+   "share": 1,
+   "print": 1,
+   "email": 1
+  }
+ ],
+ "sort_field": "posting_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "doctype": "DocType"
+}
