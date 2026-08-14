@@ -1,0 +1,51 @@
+{
+ "cards": [
+  {
+   "card": "Kitchen Order Pending"
+  },
+  {
+   "card": "Orders Today"
+  },
+  {
+   "card": "Purchases Pending"
+  },
+  {
+   "card": "Reservations Today"
+  },
+  {
+   "card": "Revenue Today"
+  },
+  {
+   "card": "Tables Occupied"
+  },
+  {
+   "card": "Unpaid Orders"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Revenue Trend",
+   "width": "Full"
+  },
+  {
+   "chart": "Order by Status",
+   "width": "Half"
+  },
+  {
+   "chart": "Purchases by Status",
+   "width": "Half"
+  }
+ ],
+ "creation": "2026-08-14 12:30:06.520734",
+ "dashboard_name": "Restaurant Management",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2026-08-14 12:30:44.891623",
+ "modified_by": "Administrator",
+ "module": "Restaurant Management",
+ "name": "Restaurant Management",
+ "owner": "Administrator"
+}
