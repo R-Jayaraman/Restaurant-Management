@@ -86,10 +86,10 @@
    "link_fieldname": "customer"
   }
  ],
- "modified": "2026-08-13 02:57:38.714559",
+ "modified": "2026-08-13 13:41:48.983113",
  "modified_by": "Administrator",
  "module": "Restaurant Management",
- "name": "Customer",
+ "name": "Restaurant Customer",
  "naming_rule": "By \"Naming Series\" format",
  "owner": "Administrator",
  "permissions": [
