@@ -18,6 +18,7 @@
   "warehouse",
   "qty",
   "date",
+  "purchase",
   "reference",
   "notes"
  ],
@@ -60,6 +61,13 @@
    "in_list_view": 1
   },
   {
+   "fieldname": "purchase",
+   "fieldtype": "Link",
+   "label": "Purchase",
+   "options": "Purchase",
+   "description": "Optional — the Purchase this stock movement relates to, for traceability. Qty is always entered manually and is not copied from the Purchase."
+  },
+  {
    "fieldname": "reference",
    "fieldtype": "Data",
    "label": "Reference"
@@ -75,7 +83,7 @@
  "issingle": 0,
  "istable": 0,
  "links": [],
- "modified": "2026-08-13 02:57:38.714559",
+ "modified": "2026-08-14 16:39:28.603799",
  "modified_by": "Administrator",
  "module": "Restaurant Management",
  "name": "Stock Transaction",
