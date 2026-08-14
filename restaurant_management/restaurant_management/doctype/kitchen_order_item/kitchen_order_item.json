@@ -30,7 +30,8 @@
    "fieldtype": "Data",
    "label": "Item Name",
    "fetch_from": "order_item.item_name",
-   "read_only": 1
+   "read_only": 1,
+   "in_list_view": 1
   },
   {
    "fieldname": "qty",
@@ -38,12 +39,14 @@
    "label": "Qty",
    "fetch_from": "order_item.qty",
    "read_only": 1,
-   "precision": "2"
+   "precision": "2",
+   "in_list_view": 1
   },
   {
    "fieldname": "special_instructions",
    "fieldtype": "Small Text",
-   "label": "Special Instructions"
+   "label": "Special Instructions",
+   "in_list_view": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -51,7 +54,7 @@
  "issingle": 0,
  "istable": 1,
  "links": [],
- "modified": "2026-08-13 02:57:38.714559",
+ "modified": "2026-08-14 16:22:02.167578",
  "modified_by": "Administrator",
  "module": "Restaurant Management",
  "name": "Kitchen Order Item",
