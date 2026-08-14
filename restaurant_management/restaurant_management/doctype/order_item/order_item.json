@@ -1,14 +1,9 @@
 {
  "actions": [],
- "allow_auto_repeat": 0,
- "allow_copy": 0,
- "allow_events_in_timeline": 0,
- "allow_import": 0,
- "allow_rename": 0,
  "autoname": "hash",
- "creation": "2026-08-13 03:00:00.000000",
- "custom": 0,
+ "creation": "2026-08-13 03:00:00",
  "description": "Line item within an Order.",
+ "doctype": "DocType",
  "document_type": "Document",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -23,31 +18,35 @@
   {
    "fieldname": "menu_item",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Menu Item",
    "options": "Menu Item",
    "reqd": 1
   },
   {
+   "fetch_from": "menu_item.item_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Item Name",
-   "fetch_from": "menu_item.item_name",
    "read_only": 1
   },
   {
+   "default": "1",
    "fieldname": "qty",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Qty",
-   "default": "1",
-   "reqd": 1,
-   "precision": "2"
+   "precision": "2",
+   "reqd": 1
   },
   {
+   "fetch_from": "menu_item.price",
    "fieldname": "rate",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Rate",
    "options": "currency",
-   "fetch_from": "menu_item.price",
    "reqd": 1
   },
   {
@@ -59,21 +58,19 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 0,
- "issingle": 0,
  "istable": 1,
  "links": [],
- "modified": "2026-08-13 02:57:38.714559",
+ "modified": "2026-08-14 16:11:12.242089",
  "modified_by": "Administrator",
  "module": "Restaurant Management",
  "name": "Order Item",
  "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "idx",
  "sort_order": "ASC",
  "states": [],
- "track_changes": 1,
- "doctype": "DocType",
- "title_field": "item_name"
+ "title_field": "item_name",
+ "track_changes": 1
 }

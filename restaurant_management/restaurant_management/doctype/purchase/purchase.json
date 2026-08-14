@@ -69,8 +69,13 @@
  "is_submittable": 0,
  "issingle": 0,
  "istable": 0,
- "links": [],
- "modified": "2026-08-13 02:57:38.714559",
+ "links": [
+  {
+   "link_doctype": "Stock Transaction",
+   "link_fieldname": "purchase"
+  }
+ ],
+ "modified": "2026-08-14 16:39:28.603799",
  "modified_by": "Administrator",
  "module": "Restaurant Management",
  "name": "Purchase",
