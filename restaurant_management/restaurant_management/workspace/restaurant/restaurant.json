@@ -1,0 +1,305 @@
+{
+ "app": "restaurant_management",
+ "charts": [],
+ "content": "[{\"id\":\"Dt8egOpmVf\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Welcome to the Restaurant workspace</span>\",\"col\":12}},{\"id\":\"fQJs8xvV8N\",\"type\":\"paragraph\",\"data\":{\"text\":\"Shortcut\",\"col\":12}},{\"id\":\"4z1vVaQNM-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant Payment\",\"col\":3}},{\"id\":\"t0ybmAeum1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Order\",\"col\":3}},{\"id\":\"NtOF8zphgl\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Table\",\"col\":3}},{\"id\":\"pXJzXsD9kZ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Restaurant Customer\",\"col\":3}},{\"id\":\"oPzgUm6DZb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Menu Item\",\"col\":3}},{\"id\":\"b5kr7K_5jE\",\"type\":\"paragraph\",\"data\":{\"text\":\"Stepup\",\"col\":12}},{\"id\":\"K2J9q6bmmr\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":4}},{\"id\":\"ahpWMgAo7n\",\"type\":\"card\",\"data\":{\"card_name\":\"Front of House\",\"col\":4}},{\"id\":\"H3sMvkZzB8\",\"type\":\"card\",\"data\":{\"card_name\":\"Menu & Orders\",\"col\":4}},{\"id\":\"tFksJTKGUs\",\"type\":\"card\",\"data\":{\"card_name\":\"Payments\",\"col\":4}},{\"id\":\"PkfUD6IfM1\",\"type\":\"card\",\"data\":{\"card_name\":\"Inventory & Purchasing\",\"col\":4}},{\"id\":\"t0JgEoKUuP\",\"type\":\"card\",\"data\":{\"card_name\":\"Staff & Expenses\",\"col\":4}},{\"id\":\"bKyvCARGV2\",\"type\":\"card\",\"data\":{\"card_name\":\"Accounting\",\"col\":4}}]",
+ "creation": "2026-08-14 11:13:27.029845",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "hide_custom": 0,
+ "icon": "",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Restaurant",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Setup",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Settings",
+   "link_count": 0,
+   "link_to": "Restaurant Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Table",
+   "link_count": 0,
+   "link_to": "Table",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Front of House",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Customer",
+   "link_count": 0,
+   "link_to": "Restaurant Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reservation",
+   "link_count": 0,
+   "link_to": "Reservation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu & Orders",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu Item",
+   "link_count": 0,
+   "link_to": "Menu Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order",
+   "link_count": 0,
+   "link_to": "Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Kitchen Order",
+   "link_count": 0,
+   "link_to": "Kitchen Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payments",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Payment",
+   "link_count": 0,
+   "link_to": "Restaurant Payment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Inventory & Purchasing",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Inventory Item",
+   "link_count": 0,
+   "link_to": "Inventory Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Transaction",
+   "link_count": 0,
+   "link_to": "Stock Transaction",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase",
+   "link_count": 0,
+   "link_to": "Purchase",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Staff & Expenses",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Staff",
+   "link_count": 0,
+   "link_to": "Staff",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Expense",
+   "link_count": 0,
+   "link_to": "Restaurant Expense",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Accounting",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Account",
+   "link_count": 0,
+   "link_to": "Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Payment Mode Account",
+   "link_count": 0,
+   "link_to": "Payment Mode Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ledger Entry",
+   "link_count": 0,
+   "link_to": "Ledger Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-14 19:10:37.532073",
+ "modified_by": "Administrator",
+ "module": "Restaurant Management",
+ "name": "Restaurant",
+ "number_cards": [],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 0.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Restaurant Payment",
+   "link_to": "Restaurant Payment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Order",
+   "link_to": "Order",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Table",
+   "link_to": "Table",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Restaurant Customer",
+   "link_to": "Restaurant Customer",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Menu Item",
+   "link_to": "Menu Item",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Restaurant",
+ "type": "Workspace"
+}
